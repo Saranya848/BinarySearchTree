@@ -20,6 +20,11 @@ public class Main {
 		System.out.println("The inorder traversal of the given binary tree is - \n");
 		System.out.print("Inorder traversal: ");
 		bst.inorder();
+		boolean val = bst.search(65);
+		if(val==true) {
+			System.out.println("\nKey found in BST:" + val);
+		}
+		else System.out.println("\nKey not found in BST:" + val);
 	}
 
 }

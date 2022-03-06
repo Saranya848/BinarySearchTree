@@ -3,9 +3,10 @@ package com.bstproblem;
 class BST {
 	/**
 	 * insert - insert a node in BST and it calls insert_recursive method
-	 * insert_Recursive - used to call insert method recursively to insert a node into a particular position
-	 * inorder - method to call inOrder traversal of BST
+	 * insert_Recursive - used to call insert method recursively to insert a node
+	 * into a particular position inorder - method to call inOrder traversal of BST
 	 * inorderRec - recursively checking the inOrder traversal of tree
+	 * getSize - size of tree for checking all the nodes present
 	 * minValu - method to call minimum value to left of parentnode
 	 */
 
@@ -25,13 +26,6 @@ class BST {
 		}
 	}
 
-	/**
-	 * PROCEDURE
-	 * Method for insert a node in BST
-	 * calls insert_recursive method
-	 * 
-	 * 
-	 */
 	Node root;
 
 	BST() {
@@ -63,39 +57,41 @@ class BST {
 		}
 
 		// Traverse to the right place and insert the node
-		if (data < root.data) 
-			root.left = insertdata(root.left, data);//data if min moves to left of root(parent)
+		if (data < root.data)
+			root.left = insertdata(root.left, data);// data if min moves to left of root(parent)
 		else if (data > root.data)
-			root.right = insertdata(root.right, data);//data if min moves to right of root(parent) 
+			root.right = insertdata(root.right, data);// data if min moves to right of root(parent)
 
 		return root;
 	}
-	
-/**
- * method to call inOrder traversal of BST
- */
+
+	/**
+	 * method to call inOrder traversal of BST
+	 */
 	void inorder() {
 		inorderRec(root);
 	}
-	
-/**
- * recursively checking the inOrder traversal of tree
- * @param root - root node to insert next nodes
- */
+
+	/**
+	 * recursively checking the inOrder traversal of tree
+	 * 
+	 * @param root - root node to insert next nodes
+	 */
 	// Inorder Traversal
 	void inorderRec(Node root) {
 		if (root != null) {
 			inorderRec(root.left);
-			System.out.print(root.data + " -> ");
+			System.out.println(root.data + " -> ");
 			inorderRec(root.right);
 		}
 	}
-	
-/**
- * Method for checking minimum value
- * @param root
- * @return
- */
+
+	/**
+	 * Method for checking minimum value
+	 * 
+	 * @param root
+	 * @return
+	 */
 	// Find the inorder successor
 	int minValue(Node root) {
 		int minv = root.data;
@@ -104,5 +100,43 @@ class BST {
 			root = root.left;
 		}
 		return minv;
+	}
+	/**
+	 * method to call Size Of BST
+	 */
+	public void Size() {
+		System.out.println("Size of the tree is "+getSize(root));
+
+	}
+	/**
+	 * this method is used to find size of tree for checking all the nodes present
+	 * @param root - input of taking root node
+	 * @return - integer value i.e size of the tree
+	 */
+	public int getSize(Node root) {
+		if(root==null)
+			return 0;
+		return  getSize(root.left) +getSize(root.right);
+
+
+	}
+	/**
+	 * Method to find key in the tree
+	 */
+	boolean search(int data) {
+		root = search_Recursive(root, data);
+		if (root != null)
+			return true;
+		else
+			return false;
+	}
+
+	private Node search_Recursive(Node root, int data) {
+		//root is null or key is present at root 
+		if(root==null || root.data == data)
+			return root;
+		if(root.data < 0) 
+			return search_Recursive(root.left, data);
+		return search_Recursive(root.right, data);
 	}
 }
