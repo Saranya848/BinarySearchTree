@@ -135,7 +135,7 @@ class BST {
 		//root is null or key is present at root 
 		if(root==null || root.data == data)
 			return root;
-		if(root.data < 0) 
+		if(root.data > data)  
 			return search_Recursive(root.left, data);
 		return search_Recursive(root.right, data);
 	}
